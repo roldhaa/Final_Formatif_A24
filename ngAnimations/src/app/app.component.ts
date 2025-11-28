@@ -25,6 +25,7 @@ export class AppComponent {
   ng_bounce = 0;
   ng_shake = 0;
   ng_tada = 0;
+  css_rotateLeft = false;
 
   constructor() {
 
@@ -46,12 +47,34 @@ async Animationunefois(){
 this.ng_tada++
   }
 
-  lancerAnimations(boucle: boolean) {
-  ... exécute les 3 animations ...
-  if (boucle === true) {
-     ... recommence la séquence ...
-  }
+lancerAnimations() {
+  
+  this.playShake();
 }
 
+playShake() {
+  this.ng_shake++;
+  setTimeout(() => {
+    this.playBounce();
+  },SHAKE_DURATION_SECONDS * 1000);
+}
+
+playBounce() {
+  this.ng_bounce++;
+  setTimeout(() => {
+    this.playTada();
+  },BOUNCE_DURATION_SECONDS * 1000);
+}
+
+playTada() {
+  this.ng_tada++;
+  setTimeout(() => {
+    this.playShake();
+  },TADA_DURATION_SECONDS * 1000);
+}
+bounceMe() {
+  this.css_rotateLeft = true;
+  setTimeout(() => {this.css_rotateLeft = false;}, 4000);
+}
 
 }
